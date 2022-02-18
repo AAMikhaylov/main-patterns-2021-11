@@ -122,7 +122,6 @@ class ExceptionHandlingTest {
         var i = countDownLatch.await(30, TimeUnit.SECONDS);
         verify(commandQueue, atLeast(3)).take();
         assertTrue(processedCommands.containsAll(List.of(MoveCommand.class, LogCommand.class, RepeatCommand.class)));
-        processedCommands.forEach(c-> System.out.println(c.getSimpleName()));
         verify(movable, times(3)).getPosition();
         verify(logger, times(1)).log(Level.SEVERE, "SecondRepeatCommand error. Reason: Can't get position");
     }
